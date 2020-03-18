@@ -44,6 +44,7 @@ public class Project {
 
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
+        this.enterprise.getProjects().add(this);
     }
 
     public Enterprise getEnterprise() {

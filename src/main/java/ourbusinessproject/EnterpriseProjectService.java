@@ -20,6 +20,7 @@ public class EnterpriseProjectService {
     }
 
     public void save(Project project) {
+        entityManager.persist(project.getEnterprise());
         entityManager.persist(project);
         entityManager.flush();
     }

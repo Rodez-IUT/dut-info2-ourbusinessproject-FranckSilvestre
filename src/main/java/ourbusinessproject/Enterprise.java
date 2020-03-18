@@ -7,7 +7,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class Enterprise {
@@ -26,7 +28,7 @@ public class Enterprise {
     private String contactEmail;
 
     @OneToMany(mappedBy = "enterprise")
-    private Collection<Project> projects;
+    private Collection<Project> projects = new ArrayList<>();
 
     public String getName() {
         return name;
