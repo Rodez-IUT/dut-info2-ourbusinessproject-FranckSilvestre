@@ -1,5 +1,7 @@
 package ourbusinessproject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,6 +28,7 @@ public class Enterprise {
     private String contactEmail;
 
     @OneToMany(mappedBy = "enterprise")
+    @JsonIgnore
     private Collection<Project> projects;
 
     public String getName() {
