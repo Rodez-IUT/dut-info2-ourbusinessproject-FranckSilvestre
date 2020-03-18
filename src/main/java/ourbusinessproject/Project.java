@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 @Entity
 public class Project {
@@ -43,8 +44,16 @@ public class Project {
     }
 
     public void setEnterprise(Enterprise enterprise) {
+        if (this.enterprise != null) {
+            this.enterprise.getProjects().remove(this);
+        }
         this.enterprise = enterprise;
-        this.enterprise.getProjects().add(this);
+        if (this.enterprise != null) {
+            if (this.enterprise.getProjects() == null) {
+                this.enterprise.setProjects(new ArrayList<>());
+            }
+            this.enterprise.getProjects().add(this);
+        }
     }
 
     public Enterprise getEnterprise() {
