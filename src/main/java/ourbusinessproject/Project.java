@@ -23,6 +23,14 @@ public class Project {
     @ManyToOne
     private Enterprise enterprise;
 
+    public Project() {}
+
+    public Project(String title, String description, Enterprise enterprise) {
+        this.title = title;
+        this.description = description;
+        setEnterprise(enterprise);
+    }
+
     public String getTitle() {
         return title;
     }
