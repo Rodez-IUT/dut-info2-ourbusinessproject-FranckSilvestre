@@ -23,6 +23,9 @@ public class InitializationService {
 
     @Transactional
     public void initProjects() {
+        // la transaction garantit que, si une erreur apparait dans une des instructions alors
+        // un rollback se déclenchera et la base de données restera dans le même état qu'avant
+        // le démarrage de la méthode.
         initEnterprise1();
         initEnterprise2();
 
