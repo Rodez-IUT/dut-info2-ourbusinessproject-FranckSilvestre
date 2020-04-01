@@ -22,7 +22,7 @@ public class InitializationService {
     }
 
     @Transactional
-    public void initProjects() {
+    public void initProjects() throws Exception {
         initEnterprise1();
         initEnterprise2();
 
@@ -32,37 +32,52 @@ public class InitializationService {
 
     }
 
-    private void initAndSaveProject1E1() {
-        project1E1 = new Project("p1e1","p1 e1 description", enterprise1);
-        enterpriseProjectService.save(project1E1);
-        enterprise1 = project1E1.getEnterprise();
+    private void initAndSaveProject1E1() throws Exception {
+        project1E1 = enterpriseProjectService.findProjectByTitle("p1e1");
+        if (project1E1 == null) {
+            project1E1 = new Project("p1e1", "p1 e1 description", enterprise1);
+            enterpriseProjectService.save(project1E1);
+            enterprise1 = project1E1.getEnterprise();
+        }
     }
 
-    private void initAndSaveProject1E2() {
-        project1E2 = new Project("p1e2","p1 e2 description", enterprise2);
-        enterpriseProjectService.save(project1E2);
-        enterprise2 = project1E2.getEnterprise();
+    private void initAndSaveProject1E2() throws Exception {
+        project1E2 = enterpriseProjectService.findProjectByTitle("p1e2");
+        if (project1E2 == null) {
+            project1E2 = new Project("p1e2","p1 e2 description", enterprise2);
+            enterpriseProjectService.save(project1E2);
+            enterprise2 = project1E2.getEnterprise();
+        }
     }
 
-    private void initAndSaveProject2E1() {
-        project2E1 = new Project("p2e1","p2 e1 description", enterprise1);
-        enterpriseProjectService.save(project2E1);
+    private void initAndSaveProject2E1() throws Exception {
+        project2E1 = enterpriseProjectService.findProjectByTitle("p2e1");
+        if (project2E1 == null) {
+            project2E1 = new Project("p2e1","p2 e1 description", enterprise1);
+            enterpriseProjectService.save(project2E1);
+        }
     }
 
-    private void initEnterprise1() {
-        enterprise1 = new Enterprise();
-        enterprise1.setName("E1");
-        enterprise1.setDescription("E1 description");
-        enterprise1.setContactName("Paul Durand");
-        enterprise1.setContactEmail("paul.durand@e1.com");
+    private void initEnterprise1() throws Exception {
+        enterprise1 = enterpriseProjectService.findEnterpriseByName("E1");
+        if (enterprise1 == null) {
+            enterprise1 = new Enterprise();
+            enterprise1.setName("E1");
+            enterprise1.setDescription("E1 description");
+            enterprise1.setContactName("Paul Durand");
+            enterprise1.setContactEmail("paul.durand@e1.com");
+        }
     }
 
-    private void initEnterprise2() {
-        enterprise2 = new Enterprise();
-        enterprise2.setName("E2");
-        enterprise2.setDescription("E2 description");
-        enterprise2.setContactName("Paul Dupond");
-        enterprise2.setContactEmail("paul.dupond@e2.com");
+    private void initEnterprise2() throws Exception {
+        enterprise2 = enterpriseProjectService.findEnterpriseByName("E2");
+        if (enterprise2 == null) {
+            enterprise2 = new Enterprise();
+            enterprise2.setName("E2");
+            enterprise2.setDescription("E2 description");
+            enterprise2.setContactName("Paul Dupond");
+            enterprise2.setContactEmail("paul.dupond@e2.com");
+        }
     }
 
     public Project getProject1E1() {

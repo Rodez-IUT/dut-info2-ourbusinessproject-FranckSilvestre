@@ -27,7 +27,7 @@ public class BootstrapTest {
     }
 
     @Test
-    public void testInitMethodInvokeInitializationService() {
+    public void testInitMethodInvokeInitializationService() throws Exception {
 
         // given a bootstrap and its initialization service
         assertThat(bootstrap, is(notNullValue()));
@@ -40,7 +40,7 @@ public class BootstrapTest {
     }
 
     @Test
-    public void testIniBootstrapMethodCatchRuntimeExceptionComingFromInitProjects() {
+    public void testIniBootstrapMethodCatchRuntimeExceptionComingFromInitProjects() throws Exception {
         // given a bootstrap and its initialization service throwing an exception
         willThrow(RuntimeException.class).given(initializationService).initProjects();
 
